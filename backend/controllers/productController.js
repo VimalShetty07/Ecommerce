@@ -20,23 +20,39 @@ exports.getAllProducts = async (req, res)=> {
 }
 
 
-exports.updateProducts = async (req, res)=>{
-     let products = await Product.findById(req.body.id);
-     if(!products){
+exports.updateProducts = async (req, res,next)=>{
+     let productss = await Product.findById(req.params.id);
+     if(!productss){
           return res.status(500).json({
                success: false,
                message: 'Product not found'
           })
      }
-     product = await Product.findByIdAndUpdate(req.params.id, req.body,{
+     productss = await Product.findByIdAndUpdate(req.params.id, req.body,{
           new:true,
           runValidators:true,
-          useFindAndModify:false,
           useFindAndModify:false
+          
      })
 
      res.status(200).json({
           success: true,
-          product
+          productss
+     });
+}
+
+exports.deleteProduct = async(req, res, next) => {
+     const product = await Product.findById(req.params.id);
+
+     if(!product) {
+          return res.status(500).json({
+               sucess: false,
+               message: 'Product not found'
+          })
+     }
+     await product.remove();
+     res.status(200).json({
+          success: true,
+          message: 'Product deleted successfully'
      })
 }
