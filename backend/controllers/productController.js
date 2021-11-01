@@ -1,4 +1,5 @@
 const Product = require('../models/productModels');
+const Apifeatures = require('../utils/apifeatures');
 
 exports.createProduct = async (req, res, next) => {
      const product = await Product.create(req.body);
@@ -11,7 +12,10 @@ exports.createProduct = async (req, res, next) => {
 }
 
 exports.getAllProducts = async (req, res)=> {
-     const products = await Product.find();
+
+     const apifeatures = new Apifeatures(Product.find(),req.query).search()
+
+     const products = await apifeatures.query;
      res.status(200).json({ 
           success: true,
           products 
@@ -20,15 +24,34 @@ exports.getAllProducts = async (req, res)=> {
 }
 
 
+
+exports.getProductsDetails = async (req, res)=> {
+     const product = await Product.findById(req.params.id);
+
+     if(!product) {
+          return res.status(500).json({
+               sucess: false,
+               message: 'Product not found'
+          })
+     }
+     res.status(200).json({
+          success: true,
+          product
+     });
+}
+    
+
+
+
 exports.updateProducts = async (req, res,next)=>{
-     let productss = await Product.findById(req.params.id);
-     if(!productss){
+     let product = await Product.findById(req.params.id);
+     if(!product){
           return res.status(500).json({
                success: false,
                message: 'Product not found'
           })
      }
-     productss = await Product.findByIdAndUpdate(req.params.id, req.body,{
+     product = await Product.findByIdAndUpdate(req.params.id, req.body,{
           new:true,
           runValidators:true,
           useFindAndModify:false
@@ -37,7 +60,7 @@ exports.updateProducts = async (req, res,next)=>{
 
      res.status(200).json({
           success: true,
-          productss
+          product
      });
 }
 
