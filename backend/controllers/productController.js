@@ -13,7 +13,7 @@ exports.createProduct = async (req, res, next) => {
 
 exports.getAllProducts = async (req, res)=> {
 
-     const apifeatures = new Apifeatures(Product.find(),req.query).search()
+     const apifeatures = new Apifeatures(Product.find(),req.query).search().filter();
 
      const products = await apifeatures.query;
      res.status(200).json({ 

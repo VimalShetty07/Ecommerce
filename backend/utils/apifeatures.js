@@ -18,6 +18,17 @@ class Apifeatures{
         this.query = this.query.find({...keyword});
         return this;
     }
+
+    filter(){
+        const querycopy = {...this.querystr}
+        
+
+        const removeFields = ["keyword","page","limit"];
+        removeFields.forEach(key => delete querycopy[key]);
+        
+        this.query = this.query.find(querycopy);
+        return this;
+    }
 }
 
 module.exports = Apifeatures;
