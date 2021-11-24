@@ -1,10 +1,12 @@
-class ErrorHandler extends Error{
+class ErrorHander extends Error{
     constructor(message,statusCode){
-        super(message)
+        super(message);
         this.statusCode = statusCode
 
-        Error.captureStackTrace(this,this.construction);
+        Error.captureStackTrace(this,this.constructor);
+
     }
+    
 }
 
-module.exports = ErrorHandler;
+module.exports = ErrorHander

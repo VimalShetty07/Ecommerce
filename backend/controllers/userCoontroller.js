@@ -1,5 +1,6 @@
 const ErrorHandler = require('../utils/errorhandler');
 const User = require("../models/userModel");
+const sendToken = require("../utils/jwtToken.js");
 
 
 
@@ -17,12 +18,7 @@ exports.registerUser = async (req, res , next)=> {
         }
     });
 
-const token = user.getJWTToken();
-
-    res.status(201).json({
-        success:true,
-        token
-    });
+    sendToken(user,201,res);
 };
 
 //For user login and
@@ -54,16 +50,10 @@ exports.loginUser = async (req, res , next)=> {
 
     if(!isPasswordMatched){
         return res.status(401).json({
-            
-            message: 'Invalid Email or password'
+        message: 'Invalid Email or password'
        });
     }
     
-    const token = user.getJWTToken();
-
-    res.status(200).json({
-        success:true,
-        token
-    });
+    sendToken(user,200,res);
 
 }
