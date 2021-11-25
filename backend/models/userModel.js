@@ -1,73 +1,72 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
-const JWT = require('jsonwebtoken');
+const mongoose = require("mongoose");
+const validator = require("validator");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-      
-    name:{
-        type: 'string',
-        required: [true,"Please Enter your name"],
-        maxLength:[30,"Name cannot exceed 30 characters"],
-        minLength:[4,"Name should be at least 4 characters long"]
+  name: {
+    type: String,
+    required: [true, "Please Enter Your Name"],
+    maxLength: [30, "Name cannot exceed 30 characters"],
+    minLength: [4, "Name should have more than 4 characters"],
+  },
+  email: {
+    type: String,
+    required: [true, "Please Enter Your Email"],
+    unique: true,
+    validate: [validator.isEmail, "Please Enter a valid Email"],
+  },
+  password: {
+    type: String,
+    required: [true, "Please Enter Your Password"],
+    minLength: [8, "Password should be greater than 8 characters"],
+    select: false,
+  },
+  avatar: {
+    public_id: {
+      type: String,
+      required: true,
     },
-    email: {
-        type: 'string',
-        required: [true,"Please Enter your Email"],
-        unique: true,
-        validate:[validator.isEmail,"Please Enter a valid Email address"]
+    url: {
+      type: String,
+      required: true,
+    },
+  },
+  role: {
+    type: String,
+    default: "user",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 
-
-    },
-    password: {
-        type: 'string',
-        required: [true,"Please Enter your password"],
-        minLength:[8,"Password should be at least 8 characters long"],
-        select:false
-    },
-    avatar: {
-        public_id:{
-            type: 'string',
-            required: true
-        },
-        url: {
-            type: 'string',
-            required: true
-        }
-    },
-    role: {
-        type: 'string',
-        default: 'user'
-    },
-    resetPasswordToken: String,
-    resetPasswordExpire: Date,
-
+  resetPasswordToken: String,
+  resetPasswordExpire: Date,
 });
 
-userSchema.pre("save",async function(next){
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
+  }
 
-    if(!this.isModified("password")){
-       next();
-    }
-
-
-       this.password = await bcrypt.hash(this.password,10);
+  this.password = await bcrypt.hash(this.password, 10);
 });
 
-
-
-userSchema.methods.getJWTToken = function(){
-      return JWT.sign({id:this._id},process.env.JWT_SECRET,{
-          expiresIn:process.env.JWT_EXPIRE,
-      });
-
-}
-
-
-//compare password 
-userSchema.methods.comparePassword = async function(password){
-    return await bcrypt.compare(password,this.password)
+// JWT TOKEN
+userSchema.methods.getJWTToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
 };
 
-module.exports = mongoose.model("User",userSchema);
+// Compare Password
+
+userSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
+
+
+module.exports = mongoose.model("User", userSchema);

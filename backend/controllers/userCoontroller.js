@@ -1,59 +1,52 @@
-const ErrorHandler = require('../utils/errorhandler');
+const ErrorHandler = require("../utils/errorhandler");
+const catchAsyncErrors = require("../middleware/catchAsynchError");
 const User = require("../models/userModel");
-const sendToken = require("../utils/jwtToken.js");
+const sendToken = require("../utils/jwtToken");
 
 
 
-//For user registration
+// Register a User
+exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  
+
+  const { name, email, password } = req.body;
+
+  const user = await User.create({
+    name,
+    email,
+    password,
+    avatar: {
+      public_id: "pp",
+      url:"j"
+    },
+  });
+
+  sendToken(user, 201, res);
+});
+
+// Login User
+exports.loginUser = catchAsyncErrors(async(req, res, next)=>{
+  const {email, password} = req.body;
+
+  //check passwordKey
+
+  if(!password || !email) {
+    return next(new ErrorHandler("Please Enter Email or Password",400))
+  }
+
+  const user = await User.findOne({email}).select("+password");
+
+  if(!user) {
+    return next(new ErrorHandler("Invalid Email or Password",401))
+  }
+
+  const isPasswordMatch = user.comparePassword(password);
+
+  if(!isPasswordMatch) {
+    return next(new ErrorHandler("Invalid Email or Password",401))
+  }
+
+  sendToken(user,200,res)
 
 
-exports.registerUser = async (req, res , next)=> {
-    const {name,email,password} = req.body;
-
-    const user = await User.create({
-        name,email,password,
-        avatar:{
-            public_id: "This is sample id",
-            url:"profileurl"
-        }
-    });
-
-    sendToken(user,201,res);
-};
-
-//For user login and
-exports.loginUser = async (req, res , next)=> {
-    const {email,password} = req.body;
-
-
-
-//check if user have entered email and password
-    if(!email || !password){
-        return res.status(400).json({
-            
-            message: 'please enter email and password'
-       });
-    }
-
-
-    const user = await User.findOne({email}).select("+password");
-
-    if(!user){
-        return res.status(401).json({
-            
-            message: 'Invalid Email or password'
-       });
- 
-    }
-    const isPasswordMatched = user.comparePassword(password);
-
-
-    if(!isPasswordMatched){
-        return res.status(401).json({
-        message: 'Invalid Email or password'
-       });
-    }
-    
-    sendToken(user,200,res);
-
-}
+});
