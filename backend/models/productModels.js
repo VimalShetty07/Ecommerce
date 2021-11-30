@@ -44,6 +44,11 @@ const productSchema = new mongoose.Schema({
         default:0
     },
     revivews:[{
+        user: {
+            type: mongoose.Schema.ObjectId,
+            ref: "User",
+            required: true,
+          },
         name: {
             type: 'string',
             required: [true]
