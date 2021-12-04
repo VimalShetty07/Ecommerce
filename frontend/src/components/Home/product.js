@@ -7,6 +7,8 @@ const options = {
     color: "rgba(20,20,20,0.1)",
     activeColor:"tomato",
     value:2.5,
+    isHalf:true,
+    size: window.innerwidth <600 ? 20 : 25
   };
 
 const Product = ({ product }) => {
