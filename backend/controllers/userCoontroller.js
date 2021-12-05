@@ -4,11 +4,18 @@ const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail")
 const crypto = require("crypto");
+const bcrypt = require("bcryptjs");
+const cloudinary = require("cloudinary")
 
 
 
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
   
 
   const { name, email, password } = req.body;
@@ -18,8 +25,8 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     email,
     password,
     avatar: {
-      public_id: "pp",
-      url:"j"
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
     },
   });
 
@@ -41,10 +48,10 @@ exports.loginUser = catchAsyncErrors(async(req, res, next)=>{
   if(!user) {
     return next(new ErrorHandler("Invalid Email or Password",401))
   }
+  const isPasswordMatched = await bcrypt.compare(password, user.password)
+  
 
-  const isPasswordMatch = user.comparePassword(password);
-
-  if(!isPasswordMatch) {
+  if(!isPasswordMatched) {
     return next(new ErrorHandler("Invalid Email or Password",401))
   }
 
@@ -52,6 +59,7 @@ exports.loginUser = catchAsyncErrors(async(req, res, next)=>{
 
 
 });
+
 
 
 // Logout User
@@ -282,4 +290,4 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     success: true,
     message: "User Deleted Successfully",
   });
-});
+})
