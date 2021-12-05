@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.16.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -18,7 +20,7 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
     "react-js-pagination": "^3.0.3",
-    "react-material-ui-carousel": "^2.3.1",
+    "react-material-ui-carousel": "^2.3.8",
     "react-rating-stars-component": "^2.2.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
@@ -52,5 +54,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://192.168.43.159:4000"
 }

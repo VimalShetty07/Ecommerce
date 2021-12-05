@@ -68,3 +68,52 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+
+
+
+
+
+
+
+
+//home.js
+  {
+             products && products && <Product productList={products}/>
+            }
+
+
+product.js
+
+const Product = ({ productList}) => {
+    console.log(productList,"Props");
+    return (  
+
+
+
+      
+        <div className="table">
+                <table style={{ width: '100%' }}>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {productList.map((item, key) => (
+                            <tr key={key}>
+                                <td>{item._id}</td>
+                                <td>{item.name}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
