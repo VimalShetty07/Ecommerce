@@ -34,6 +34,7 @@ const userSchema = new mongoose.Schema({
       required: true,
     },
   },
+ 
   role: {
     type: String,
     default: "user",
@@ -64,12 +65,9 @@ userSchema.methods.getJWTToken = function () {
 
 // Compare Password
 
-// userSchema.methods.comparePassword = async function (enteredpassword) {
-//   bcrypt.compare(password, user.password).then(isPasswordMatched => {
-//   // console.log(enteredpassword)
-//   // console.log( await bcrypt.compare(enteredpassword, this.password))
-//   return false;
-// });
+userSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
 
 
 // Generating Password Reset Token
