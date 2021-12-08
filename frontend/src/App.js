@@ -18,6 +18,8 @@ import ProtectRoute from "./components/Route/ProtectedRoute"
 import UpdateProfile from "./components/User/UpdateProfile"
 import UpdatePassword from "./components/User/UpdatePassword"
 import ForgotPassword from "./components/User/ForgotPassword"
+import Cart from "./components/Cart/Cart"
+import Shipping from "./components/Cart/Shipping"
 
 
 function App() {
@@ -48,6 +50,8 @@ React.useEffect(() => {
     <ProtectRoute exact path="/password/update" component={UpdatePassword} />
     <Route exact path="/password/forgot" component={ForgotPassword} />
     <Route exact path="/login" component={LoginSignUp} />
+    <Route exact path="/cart" component={Cart} />
+    <ProtectRoute exact path="/shipping" component={Shipping} />
     <Footer />
     </Router>
 
