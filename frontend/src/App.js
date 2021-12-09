@@ -30,7 +30,9 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import OrderDetails from './components/Order/OrderDetails';
-
+import Dashboard from "./components/admin/Dashboard"
+import ProductList from "./components/admin/ProductList"
+import NewProduct from "./components/admin/NewProduct"
 
 function App() {
 
@@ -89,6 +91,10 @@ React.useEffect(() => {
    <ProtectRoute exact path="/order/confirm" component={ConfirmOrder} />
     <ProtectRoute exact path="/order/:id" component={OrderDetails} />
    </Switch>
+
+   <ProtectRoute isAdmin={true} exact path="/admin/dashboard" component={Dashboard} />
+   <ProtectRoute isAdmin={true} exact path="/admin/products" component={ProductList} />
+   <ProtectRoute isAdmin={true} exact path="/admin/product" component={NewProduct} />
 
     
     

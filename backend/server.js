@@ -1,13 +1,16 @@
+const express = require("express");
 const app = require('./app');
-const cloudinary = require("cloudinary");
+// const cloudinary = require("cloudinary");
 const dotenv = require('dotenv');
+const cloudinary = require('cloudinary').v2;
 const PORT = process.env.PORT || 4000;
 
 const connectDatabase = require('./config/Database');
 
 dotenv.config({path: "backend/config/config.env"});
 
-
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 connectDatabase()
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
