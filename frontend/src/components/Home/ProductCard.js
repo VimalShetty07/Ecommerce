@@ -4,10 +4,7 @@ import { Rating } from "@material-ui/lab";
 
 const ProductCard = ({ product }) => {
   const options = {
-    edit:false,
-    color:"rgba(20,20,20,0.1)",
-    activeColor:"tomato",
-    value: product.rating,
+    value: product.ratings,
     readOnly: true,
     precision: 0.5,
   };
@@ -26,5 +23,6 @@ const ProductCard = ({ product }) => {
     </Link>
   );
 };
+
 
 export default ProductCard;

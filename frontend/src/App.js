@@ -22,10 +22,14 @@ import ForgotPassword from "./components/User/ForgotPassword"
 import Cart from "./components/Cart/Cart"
 import Shipping from "./components/Cart/Shipping"
 import ConfirmOrder from "./components/Cart/ConfirmOrder"
-import Payment from "./components/Cart/Payment"
+import Wrapper from "./components/Cart/Payment"
+import OrderSuccess from "./components/Cart/OrderSuccess"
+
+import MyOrders from "./components/Order/MyOrders"
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import OrderDetails from './components/Order/OrderDetails';
 
 
 function App() {
@@ -56,6 +60,12 @@ React.useEffect(() => {
     <Router>
     <Header />
     {isAuthenticated && <UserOptions user={user} />}
+    {stripeApiKey && (
+        <Elements stripe={loadStripe(stripeApiKey)}>
+          <ProtectRoute exact path="/process/payment" component={Wrapper} />
+        </Elements>
+      )}
+
     <Route exact path="/" component={Home} />
     <Route exact path="/product/:id" component={ProductDetails} />
     <Route exact path="/products" component={Products} />
@@ -69,13 +79,12 @@ React.useEffect(() => {
     <Route exact path="/cart" component={Cart} />
     <ProtectRoute exact path="/shipping" component={Shipping} />
     <ProtectRoute exact path="/order/confirm" component={ConfirmOrder} />
+    <ProtectRoute exact path="/success" component={OrderSuccess} />
+    <ProtectRoute exact path="/orders" component={MyOrders} />
+    <ProtectRoute exact path="/orders/:id" component={OrderDetails} />
 
-    {stripeApiKey &&(
-      <Elements stripe={loadStripe(stripeApiKey)}>
-        <ProtectRoute exact path="/process/payment" component={Payment} />
-      </Elements>
-    )}
-    <ProtectRoute exact path="/process/payment" component={Payment} />
+    
+    
     <Footer />
     </Router>
 

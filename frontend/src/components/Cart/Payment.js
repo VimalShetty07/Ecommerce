@@ -12,12 +12,25 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 
+
 import axios from "axios";
 import "./Payment.css";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import EventIcon from "@material-ui/icons/Event";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { createOrder, clearErrors } from "../../actions/orderAction";
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
+const stripePromise = loadStripe('pk_test_51K4NynFtBlenmdN4CJRe9Um72f0aqUPus6INLWPpMArrJ7iaEwNPk6nqh0M8jUEG2Yw7N5q4rDhLyZ1CxuRIe0sP00j9uEH4VF');
+
+const Wrapper = (history) => (
+  <Elements stripe={stripePromise}>
+    <Payment {...history} />
+  </Elements>
+);
+
+
 
 const Payment = ({ history }) => {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
@@ -146,4 +159,7 @@ const Payment = ({ history }) => {
   );
 };
 
-export default Payment;
+
+
+// export default Payment;
+export default Wrapper;
