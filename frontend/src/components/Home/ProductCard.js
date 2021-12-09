@@ -4,7 +4,7 @@ import { Rating } from "@material-ui/lab";
 
 const ProductCard = ({ product }) => {
   const options = {
-    value: product.ratings,
+    value: product.rating,
     readOnly: true,
     precision: 0.5,
   };

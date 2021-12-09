@@ -30,7 +30,7 @@ const Products = ({match}) => {
   const [price, setPrice] = useState([0, 25000]);
   const [category, setCategory] = useState("");
 
-  const [ratings, setRatings] = useState(0);
+  const [rating, setRatings] = useState(0);
 
 
   const { products, loading, error, productsCount,resultPerPage,filteredProductsCount } = useSelector((state) => state.products);
@@ -55,8 +55,8 @@ const Products = ({match}) => {
       dispatch(clearErrors());
     }
 
-    dispatch(getProduct(keyword,currentPage,price,category, ratings));
-  }, [dispatch,keyword,currentPage,price,category, ratings,alert, error]);
+    dispatch(getProduct(keyword,currentPage,price,category, rating));
+  }, [dispatch,keyword,currentPage,price,category, rating,alert, error]);
 
   return (
     <Fragment>
@@ -101,7 +101,7 @@ const Products = ({match}) => {
             <fieldset>
               <Typography component="legend">Ratings Above</Typography>
               <Slider
-                value={ratings}
+                value={rating}
                 onChange={(e, newRating) => {
                   setRatings(newRating);
                 }}

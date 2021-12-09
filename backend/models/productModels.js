@@ -43,7 +43,7 @@ const productSchema = new mongoose.Schema({
         type: 'number',
         default:0
     },
-    revivews:[{
+    reviews:[{
         user: {
             type: mongoose.Schema.ObjectId,
             ref: "User",
