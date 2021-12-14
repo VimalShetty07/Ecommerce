@@ -33,6 +33,8 @@ import OrderDetails from './components/Order/OrderDetails';
 import Dashboard from "./components/admin/Dashboard"
 import ProductList from "./components/admin/ProductList"
 import NewProduct from "./components/admin/NewProduct"
+import About from "./components/layout/About/About"
+import Contact from "./components/layout/Contact/Contact"
 
 function App() {
 
@@ -49,7 +51,7 @@ function App() {
 React.useEffect(() => {
     WebFont.load({
       google: {
-        families: ["Roboto", "Droid Sans", "Chilanka"],
+        families: ["Raleway",'Bree Serif',"PT Serif","Roboto", "Droid Sans", "Chilanka"],
       },
     });
 
@@ -68,6 +70,9 @@ React.useEffect(() => {
     <Route exact path="/products" component={Products} />
     <Route  path="/products/:keyword" component={Products} />
     <Route exact path="/search" component={Search} />
+    <Route exact path="/contact" component={Contact} />
+
+    <Route exact path="/about" component={About} />
     <ProtectRoute exact path="/account" component={Profile} />
     <ProtectRoute exact path="/me/update" component={UpdateProfile} />
     <ProtectRoute exact path="/password/update" component={UpdatePassword} />

@@ -1,5 +1,5 @@
 .ProductDetails {
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff;
   width: 100vw;
   max-width: 100%;
   padding: 6vmax;
@@ -27,13 +27,20 @@
 }
 
 .detailsBlock-1 > h2 {
-  color: rgb(54, 54, 54);
-  font: 600 1.6vmax "Roboto";
+  color: rgb(7, 7, 7);
+  font: 600 2vmax "PT Serif";
 }
 
 .detailsBlock-1 > p {
   color: rgba(54, 54, 54, 0.582);
   font: 200 0.6vmax cursive;
+}
+
+.greenColor{
+  color:rgb(1, 187, 1);
+}
+.redColor{
+  color:red;
 }
 
 .detailsBlock-2 {
@@ -43,7 +50,7 @@
   border-top: 1px solid rgba(0, 0, 0, 0.205);
   border-bottom: 1px solid rgba(0, 0, 0, 0.205);
   width: 70%;
-  padding: 1vmax 0;
+  /* padding: 1vmax 0; */
 }
 
 .detailsBlock-2-span {
@@ -74,7 +81,7 @@
   transition: all 0.5s;
 }
 .detailsBlock-3-1-1 > button:hover {
-  background-color: rgba(187, 0, 0, 0.767);
+  background-color: rgba(0, 0, 0, 0.767);
 }
 
 .detailsBlock-3-1-1 > input {
@@ -83,7 +90,7 @@
   width: 2vmax;
   text-align: center;
   outline: none;
-  font: 200 0.8vmax cursive;
+  font: 200 1vmax cursive;
   color: rgba(0, 0, 0, 0.74);
 }
 
@@ -92,7 +99,7 @@
   cursor: pointer;
   color: white;
   transition: all 0.5s;
-  background-color: tomato;
+  background-color: rgb(170, 243, 102);
   font: 500 0.7vmax "Roboto";
   border-radius: 20px;
   padding: 0.5vmax 2vmax;
@@ -101,7 +108,7 @@
 }
 
 .detailsBlock-3-1 > button:last-child:hover {
-  background-color: rgb(214, 84, 61);
+  background-color: rgb(51, 255, 0);
 }
 
 .detailsBlock-3 > p {

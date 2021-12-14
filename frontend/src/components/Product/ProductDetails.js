@@ -17,7 +17,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
-// import { Rating } from "@material-ui/lab";
+
 
 const ProductDetails = ({ match }) => {
   const alert = useAlert()
@@ -31,7 +31,7 @@ const ProductDetails = ({ match }) => {
 
   const options = {
     size: "large",
-    value: product.ratings,
+    value: product.rating,
     readOnly: true,
     precision: 0.5,
   };
@@ -147,11 +147,11 @@ const ProductDetails = ({ match }) => {
               </div>
 
               <p>
-                Status:
-                <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
-                  {product.Stock < 1 ? "OutOfStock" : "InStock"}
-                </b>
-              </p>
+                  Status:
+                  <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
+                    {product.Stock < 1 ? "OutOfStock" : "InStock"}
+                  </b>
+                </p>
             </div>
 
             <div className="detailsBlock-4">

@@ -4,7 +4,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.171);
     padding: 2vmax;
     color: rgba(0, 0, 0, 0.678);
-    font: 500 1.5vmax "Roboto";
+    font: 1000 10px .5vmax 8px "PT Serif";
     text-align: center;
   }
   
@@ -20,6 +20,7 @@
     display: flex;
     justify-content: center;
     margin: 6vmax;
+    color: aqua;
   }
   
   .pagination {
@@ -59,7 +60,7 @@
   }
   
   .pageItemActive {
-    background-color: tomato;
+    background-color: rgb(0, 17, 255);
   }
   
   .pageLinkActive {
@@ -69,8 +70,8 @@
   .filterBox {
     width: 10vmax;
     position: absolute;
-    top: 10vmax;
-    left: 4vmax;
+    top: 12vmax;
+    left: 2vmax;
   }
   
   .categoryBox {
@@ -79,11 +80,12 @@
   
   .category-link {
     list-style: none;
-    color: rgba(0, 0, 0, 0.61);
-    font: 400 0.8vmax "Roboto";
+    color: rgba(31, 30, 30, 0.61);
+    font: 400 1vmax "Roboto";
     margin: 0.4vmax;
     cursor: pointer;
     transition: all 0.5s;
+    font-family: "Raleway";
   }
   .category-link:hover {
     color: tomato;

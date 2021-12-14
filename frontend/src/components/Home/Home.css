@@ -14,12 +14,13 @@
 
 .banner > h1 {
   margin: 5vmax;
-
-  font: 600 2.5vmax "Roboto";
+  color:#2F2FA2;
+  font: 600 2.5vmax "Bree Serif";
 }
 
 .banner > p {
-  font: 300 1.4vmax "Lucida Sans";
+  font: 300 1.4vmax "Bree Serif";
+  color:#2F2FA2
 }
 
 .banner > a > button {
@@ -46,7 +47,7 @@
   position: absolute;
   top: 0%;
   left: 0;
-  clip-path: polygon(100% 68%, 0 100%, 100% 100%);
+  clip-path: polygon(100% 100%, 0 100%, 100% 100%);
   max-width: 100%;
 }
 
@@ -98,10 +99,11 @@
 }
 
 .productCard > p {
-  font-family: "Roboto";
+  font-family: "Bree Serif";
   font-size: 1.2vmax;
   margin: 1vmax 0.5vmax;
   margin-bottom: 0;
+  /* text-align: center */
 }
 
 .productCard > span {
@@ -112,7 +114,8 @@
 }
 
 .productCard:hover {
-  box-shadow: 0 0 5px rgba(15, 15, 15, 0.26);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.26);
+  transition:0.5s;
 
   transform: translateY(-1vmax);
 }
