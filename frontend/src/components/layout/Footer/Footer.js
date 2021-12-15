@@ -20,8 +20,7 @@ const Footer = () => {
 
         <p>Copyrights 2021 &copy;VimalShetty</p>
       </div>
-
-      <div className="rightFooter">
+       <div className="rightFooter">
         <h4>Follow Us</h4>
         <a href="https://instagram.com/v_mal_shetty.exe?utm_medium=copy_link">Instagram</a>
         <a href="https://www.linkedin.com/in/vimal-shetty-97b767185">LinkedIn</a>
