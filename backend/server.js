@@ -1,6 +1,6 @@
 const express = require("express");
 const app = require('./app');
-// const cloudinary = require("cloudinary");
+// const cloudinary = require("cloudinary")
 const dotenv = require('dotenv');
 const cloudinary = require('cloudinary').v2;
 const PORT = process.env.PORT || 4000;
